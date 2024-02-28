@@ -4,8 +4,9 @@ import { Product } from '@/types'
 import Image from 'next/image'
 import { FC } from 'react'
 import IconButton from './icon-button'
-import { Expand, ShoppingCart } from 'lucide-react'
+import { Expand, Fullscreen, ShoppingCart } from 'lucide-react'
 import Currency from './currency'
+import { useRouter } from 'next/navigation'
 
 interface ProductCardProps {
   data: Product
@@ -13,8 +14,13 @@ interface ProductCardProps {
 
 const ProductCard: FC<ProductCardProps> = ({data}) => {
 
+    const router = useRouter()
+    const handleClick = () => {
+        router.push(`/product/${data?.id}`)
+    }
+
   return (
-    <div className='bg-white group cursor-pointer roundet-xl border p-3 space-y-4'>
+    <div onClick={handleClick} className='bg-white group cursor-pointer roundet-xl border p-3 space-y-4'>
         {/* IMAGE */}
         <div className='aspect-square roundet-xl bg-gray-100 relative'>
             <Image 
@@ -28,6 +34,10 @@ const ProductCard: FC<ProductCardProps> = ({data}) => {
                     <IconButton 
                     onClick={() => {}}
                     icon={<Expand size={20}/>}
+                    />
+                    <IconButton 
+                    onClick={handleClick}
+                    icon={<Fullscreen size={20}/>}
                     />
                     <IconButton 
                     onClick={() => {}}
